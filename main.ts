@@ -1,9 +1,32 @@
+function createSprite () {
+    mySprite = sprites.create(img`
+        . . . . . . . . . b 5 b . . . . 
+        . . . . . . . . . b 5 b . . . . 
+        . . . . . . b b b b b b . . . . 
+        . . . . . b b 5 5 5 5 5 b . . . 
+        . . . . b b 5 b c 5 5 d 4 c . . 
+        . b b b b 5 5 5 b f d d 4 4 4 b 
+        . b d 5 b 5 5 b c b 4 4 4 4 b . 
+        . . b 5 5 b 5 5 5 4 4 4 4 b . . 
+        . . b d 5 5 b 5 5 5 5 5 5 b . . 
+        . b d b 5 5 5 d 5 5 5 5 5 5 b . 
+        b d d c d 5 5 b 5 5 5 5 5 5 b . 
+        c d d d c c b 5 5 5 5 5 5 5 b . 
+        c b d d d d d 5 5 5 5 5 5 5 b . 
+        . c d d d d d d 5 5 5 5 5 d b . 
+        . . c b d d d d d 5 5 5 b b . . 
+        . . . c c c c c c c c b b . . . 
+        `, SpriteKind.Player)
+    controller.moveSprite(mySprite, 100, 100)
+    mySprite.setVelocity(0, 50)
+}
 // This just allows the user to hit a different style tile to win the game.
 scene.onHitTile(SpriteKind.Player, 10, function (sprite) {
     game.gameOver(true)
 })
 // This is where we can set our levels.  You create a tile map and set the "level_NUMBER" to the number of the level (in this case starting at 0)... Each tile map is different based on each condition... This is checking the level_NUMBER and then setting the tilemap based on what number level you are on.  It also places the player on the pink starting tile
 function levelChange (level_NUMBER: number) {
+    // For this function, it needs a "level_NUMBER" attached to it so that we can change the number (you do this when creating the function by clicking "number" and then renaming the variable.  the variable is pulled directly from the function into each of these conditions
     if (level_NUMBER == 0) {
         scene.setTileMap(img`
             . . . . . . . . . . 
@@ -56,28 +79,9 @@ scene.onHitTile(SpriteKind.Player, 2, function (sprite) {
     currentLevel += 1
     levelChange(currentLevel)
 })
-let currentLevel = 0
 let mySprite: Sprite = null
-mySprite = sprites.create(img`
-    . . . . . . . . . b 5 b . . . . 
-    . . . . . . . . . b 5 b . . . . 
-    . . . . . . b b b b b b . . . . 
-    . . . . . b b 5 5 5 5 5 b . . . 
-    . . . . b b 5 b c 5 5 d 4 c . . 
-    . b b b b 5 5 5 b f d d 4 4 4 b 
-    . b d 5 b 5 5 b c b 4 4 4 4 b . 
-    . . b 5 5 b 5 5 5 4 4 4 4 b . . 
-    . . b d 5 5 b 5 5 5 5 5 5 b . . 
-    . b d b 5 5 5 d 5 5 5 5 5 5 b . 
-    b d d c d 5 5 b 5 5 5 5 5 5 b . 
-    c d d d c c b 5 5 5 5 5 5 5 b . 
-    c b d d d d d 5 5 5 5 5 5 5 b . 
-    . c d d d d d d 5 5 5 5 5 d b . 
-    . . c b d d d d d 5 5 5 b b . . 
-    . . . c c c c c c c c b b . . . 
-    `, SpriteKind.Player)
-controller.moveSprite(mySprite, 100, 100)
-mySprite.setVelocity(0, 50)
+let currentLevel = 0
+createSprite()
 scene.setTile(7, img`
     d 1 d d d d d d d 1 d d d d d d 
     d 1 d d d d d d d 1 d d d d d d 
