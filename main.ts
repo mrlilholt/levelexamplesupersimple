@@ -1,3 +1,8 @@
+// This just allows the user to hit a different style tile to win the game.
+scene.onHitTile(SpriteKind.Player, 10, function (sprite) {
+    game.gameOver(true)
+})
+// This is where we can set our levels.  You create a tile map and set the "level_NUMBER" to the number of the level (in this case starting at 0)... Each tile map is different based on each condition... This is checking the level_NUMBER and then setting the tilemap based on what number level you are on.  It also places the player on the pink starting tile
 function levelChange (level_NUMBER: number) {
     if (level_NUMBER == 0) {
         scene.setTileMap(img`
@@ -32,9 +37,21 @@ function levelChange (level_NUMBER: number) {
             . . . . . 7 7 7 7 7 
             . . . . . . . . . 7 
             `)
+    } else if (level_NUMBER == 3) {
+        scene.setTileMap(img`
+            . . . . . . . . . . 
+            3 . . . . . . . . . 
+            7 7 7 . . . . . . . 
+            7 7 7 7 . . . . . a 
+            7 7 7 7 7 7 7 7 7 7 
+            7 7 7 7 7 7 7 7 7 7 
+            . . . . . 7 7 7 7 7 
+            . . . . . . . . . 7 
+            `)
     }
     scene.placeOnRandomTile(mySprite, 3)
 }
+// in short, this allows the player to hit a red tile and upon doing so, it changes the "currentlevel".  It ADDS 1 to what ever level it is on.  Since it is the current level + 1 when we call the function to change level, it will check the condition and it will go to the next level
 scene.onHitTile(SpriteKind.Player, 2, function (sprite) {
     currentLevel += 1
     levelChange(currentLevel)
@@ -115,5 +132,26 @@ scene.setTile(3, img`
     . . . . . . . . . . . . . . . . 
     . . . . . . . . . . . . . . . . 
     `, false)
+scene.setTile(10, img`
+    . . b b b b b b b b b b b b . . 
+    . b e 4 4 4 4 4 4 4 4 4 4 e b . 
+    b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+    b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+    b e 4 4 4 4 4 4 4 4 4 4 4 4 e b 
+    b e e 4 4 4 4 4 4 4 4 4 4 e e b 
+    b e e e e e e e e e e e e e e b 
+    b e e e e e e e e e e e e e e b 
+    b b b b b b b d d b b b b b b b 
+    c b b b b b b c c b b b b b b c 
+    c c c c c c b c c b c c c c c c 
+    b e e e e e c b b c e e e e e b 
+    b e e e e e e e e e e e e e e b 
+    b c e e e e e e e e e e e e c b 
+    b b b b b b b b b b b b b b b b 
+    . b b . . . . . . . . . . b b . 
+    `, true)
+// this sets the currentLevel (used when the player goes to another level
+// 
 currentLevel = 0
+// this is calling the first level in the function's condition
 levelChange(0)
